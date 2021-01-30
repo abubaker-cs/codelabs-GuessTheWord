@@ -19,6 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/title_destination">
 
+    <!-- 01 Main: Title -->
     <fragment
         android:id="@+id/title_destination"
         android:name="com.example.android.guesstheword.screens.title.TitleFragment"
@@ -33,6 +34,8 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>
+
+    <!-- 02 Playground: Title -->
     <fragment
         android:id="@+id/game_destination"
         android:name="com.example.android.guesstheword.screens.game.GameFragment"
@@ -48,6 +51,8 @@
             app:popExitAnim="@anim/slide_out_left"
             app:popUpTo="@+id/title_destination" />
     </fragment>
+
+    <!-- 03 Results: Score -->
     <fragment
         android:id="@+id/score_destination"
         android:name="com.example.android.guesstheword.screens.score.ScoreFragment"
@@ -66,4 +71,5 @@
             android:defaultValue="0"
             app:argType="integer" />
     </fragment>
+
 </navigation>
