@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.example.android.guesstheword.R
@@ -68,8 +69,25 @@ class GameFragment : Fragment() {
             onEndGame()
         }
 
-        updateScoreText()
-        updateWordText()
+        /**
+         * Set up the observation relationship for the score and word LiveDatas
+         * Get the LiveData from your view model and call the observe method.
+         * Lesson 5 - App Architecture (UI) : Slide #16 - Add LiveData to GameViewModel
+         */
+        // Observer - scoreText
+        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
+            // binding.scoreText.text = viewModel.score.value.toString()
+            binding.scoreText.text = newScore.toString()
+        })
+
+        // Observer -
+        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
+            // binding.wordText.text = viewModel.word.value
+            binding.wordText.text = newWord
+        })
+
+        // updateScoreText()
+        // updateWordText()
         return binding.root
 
     }
@@ -81,27 +99,27 @@ class GameFragment : Fragment() {
         // score--
         // nextWord()
         viewModel.onSkip()
-        updateScoreText()
-        updateWordText()
+        // updateScoreText()
+        // updateWordText()
     }
 
     private fun onCorrect() {
         // score++
         // nextWord()
         viewModel.onCorrect()
-        updateScoreText()
-        updateWordText()
+        // updateScoreText()
+        // updateWordText()
     }
 
     /** Methods for updating the UI **/
 
-    private fun updateWordText() {
-        binding.wordText.text = viewModel.word
-    }
+    // private fun updateWordText() {
+    // binding.wordText.text = viewModel.word.value
+    // }
 
-    private fun updateScoreText() {
-        binding.scoreText.text = viewModel.score.toString()
-    }
+    // private fun updateScoreText() {
+    // binding.scoreText.text = viewModel.score.value.toString()
+    // }
 
     // End Game - Call
     private fun onEndGame() {
@@ -117,7 +135,7 @@ class GameFragment : Fragment() {
 
         // Will will fetch data from the "score" variable stored inside the GameViewMode.kt file
         // And forward it to our targeted Fragment file, that will be ScoreFragment.kt
-        action.score = viewModel.score
+        action.score = viewModel.score.value ?: 0
 
         // Here we are asking the app to navigation to the targeted Fragment WITH our "score" data
         NavHostFragment.findNavController(this).navigate(action)
