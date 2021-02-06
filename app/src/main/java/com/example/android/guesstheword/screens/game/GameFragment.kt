@@ -17,18 +17,23 @@
 package com.example.android.guesstheword.screens.game
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 
 /**
- * Fragment where the game is played
+ * UI Controller - Deals with the game_fragment.xml file
  */
 class GameFragment : Fragment() {
+
+    // We need to CONNECT our UI-Controller (this file) with the ViewModel (GameViewModel.kt)
+    private lateinit var viewModel: GameViewModel
 
     // The current word
     private var word = ""
@@ -44,6 +49,9 @@ class GameFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        Log.i("GameFragment", "Called ViewModelProvider.get")
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
                 inflater,
@@ -55,8 +63,18 @@ class GameFragment : Fragment() {
         resetList()
         nextWord()
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
+
+        // onClick() - Button: Correct
+        binding.correctButton.setOnClickListener {
+            onCorrect()
+        }
+
+        // onClick() - Button: Skip
+        binding.skipButton.setOnClickListener {
+            onSkip()
+        }
+
+
         updateScoreText()
         updateWordText()
         return binding.root
