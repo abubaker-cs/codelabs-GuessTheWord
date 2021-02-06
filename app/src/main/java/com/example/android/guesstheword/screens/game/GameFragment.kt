@@ -21,9 +21,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
 
@@ -61,6 +63,11 @@ class GameFragment : Fragment() {
             onSkip()
         }
 
+        // onEndGame() -
+        binding.endGameButton.setOnClickListener {
+            onEndGame()
+        }
+
         updateScoreText()
         updateWordText()
         return binding.root
@@ -94,5 +101,25 @@ class GameFragment : Fragment() {
 
     private fun updateScoreText() {
         binding.scoreText.text = viewModel.score.toString()
+    }
+
+    // End Game - Call
+    private fun onEndGame() {
+        gameFinished()
+    }
+
+    // End Game - Content
+    private fun gameFinished() {
+        Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
+
+        // Define the target, that will receive our DATA
+        val action = GameFragmentDirections.actionGameToScore()
+
+        // Will will fetch data from the "score" variable stored inside the GameViewMode.kt file
+        // And forward it to our targeted Fragment file, that will be ScoreFragment.kt
+        action.score = viewModel.score
+
+        // Here we are asking the app to navigation to the targeted Fragment WITH our "score" data
+        NavHostFragment.findNavController(this).navigate(action)
     }
 }
