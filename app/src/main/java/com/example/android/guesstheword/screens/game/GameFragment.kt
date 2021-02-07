@@ -82,10 +82,10 @@ class GameFragment : Fragment() {
          * Lesson 5 - App Architecture (UI) : Slide #16 - Add LiveData to GameViewModel
          */
         // Observer - scoreText
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            // binding.scoreText.text = viewModel.score.value.toString()
-            binding.scoreText.text = newScore.toString()
-        })
+        // viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
+        //    binding.scoreText.text = viewModel.score.value.toString()
+        //    binding.scoreText.text = newScore.toString()
+        // })
 
         // Observer -
         // viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
