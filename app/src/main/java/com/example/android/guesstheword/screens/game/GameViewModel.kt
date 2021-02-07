@@ -89,6 +89,13 @@ class GameViewModel : ViewModel() {
     }
 
     /**
+     * Reset the value, once the List of Words will be completed
+     */
+    fun onGameFinishComplete() {
+        _eventGameFinish.value = false
+    }
+
+    /**
      * Method: Moves to the next word in the list
      */
     private fun nextWord() {

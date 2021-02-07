@@ -143,5 +143,7 @@ class GameFragment : Fragment() {
 
         // Here we are asking the app to navigation to the targeted Fragment WITH our "score" data
         NavHostFragment.findNavController(this).navigate(action)
+
+        viewModel.onGameFinishComplete()
     }
 }
