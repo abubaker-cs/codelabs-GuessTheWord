@@ -59,6 +59,10 @@ class ScoreFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
         // binding.scoreText.text = viewModel.score.toString()
 
+        // Specify the fragment view as the lifecycle owner of the binding.
+        // This is used so that the binding can observe LiveData updates.
+        binding.lifecycleOwner = viewLifecycleOwner
+
         // Binding with the XML File
         // Set the viewModel for data binding - this allows the bound layout access to all the
         // data in teh ViewModel

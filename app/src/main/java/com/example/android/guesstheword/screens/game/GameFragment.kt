@@ -54,6 +54,8 @@ class GameFragment : Fragment() {
         // Log.i("GameFragment", "Called ViewModelProvider.get")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
+        // Specify the fragment view as the lifecycle owner of the binding
+        // This is used so that the binding can observe LiveData updates.
         binding.lifecycleOwner = viewLifecycleOwner
 
         // Binding with the XML File
@@ -87,7 +89,7 @@ class GameFragment : Fragment() {
 
         // Observer -
         // viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
-            // binding.wordText.text = viewModel.word.value
+        // binding.wordText.text = viewModel.word.value
         //    binding.wordText.text = newWord
         // })
 
