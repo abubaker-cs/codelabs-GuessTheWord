@@ -43,7 +43,15 @@ class GameFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        Log.i("GameFragment", "Called ViewModelProvider.get")
+        // Inflate view and obtain an instance of the binding class
+        binding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.game_fragment,
+                container,
+                false
+        )
+
+        // Log.i("GameFragment", "Called ViewModelProvider.get")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         // Binding with the XML File
@@ -54,14 +62,6 @@ class GameFragment : Fragment() {
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer<Boolean> { hasFinished ->
             if (hasFinished) gameFinished()
         })
-
-        // Inflate view and obtain an instance of the binding class
-        binding = DataBindingUtil.inflate(
-                inflater,
-                R.layout.game_fragment,
-                container,
-                false
-        )
 
         // onClick() - Button: Correct
         // binding.correctButton.setOnClickListener { onCorrect() }
