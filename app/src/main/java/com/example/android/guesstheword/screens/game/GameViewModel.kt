@@ -31,13 +31,13 @@ class GameViewModel : ViewModel() {
     val currentTime: LiveData<Long>
         get() = _currentTime
 
-    // For Timer
-    private val timer: CountDownTimer
-
     // The string version of the current time
     val currentTimeString = Transformations.map(currentTime) { time ->
         DateUtils.formatElapsedTime(time)
     }
+
+    // For Timer
+    private val timer: CountDownTimer
 
     /**
      * Dynamic DATA Type: MutableLiveData<>() is a Dynamic Type, i.e. it is not a constant variable
