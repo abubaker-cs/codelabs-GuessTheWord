@@ -13,7 +13,17 @@ class GameViewModel : ViewModel() {
     /**
      * Dynamic DATA Type: MutableLiveData<>() is a Dynamic Type, i.e. it is not a constant variable
      * We need to chose DATA Type: Since it is a generic class, thus we need to specify DATA type, like <String> <Int>, etc
+     *
+     * Constant: LiveData<>
+     * Variable: MutableLiveData<>()
      */
+
+    // Event which triggers the end of the game
+    private val _eventGameFinish = MutableLiveData<Boolean>()
+
+    // Backing Property:
+    val eventGameFinish: LiveData<Boolean>
+        get() = _eventGameFinish
 
     // The current word
     // var word = ""
@@ -72,10 +82,20 @@ class GameViewModel : ViewModel() {
     }
 
     /**
-     * Moves to the next word in the list
+     * Method: For the game completed Event
+     */
+    fun onGameFinish() {
+        _eventGameFinish.value = true
+    }
+
+    /**
+     * Method: Moves to the next word in the list
      */
     private fun nextWord() {
-        if (!wordList.isEmpty()) {
+        // Changed !wordList.isEmpty() to wordList.isEmpty()
+        if (wordList.isEmpty()) {
+            onGameFinish()
+        } else {
             //Select and remove a word from the list
             _word.value = wordList.removeAt(0)
         }
