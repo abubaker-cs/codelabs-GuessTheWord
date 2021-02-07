@@ -12,6 +12,11 @@ class ScoreViewModel(finalScore: Int) : ViewModel() {
     val score: LiveData<Int>
         get() = _score
 
+    // Play Again Button
+    private val _eventPlayAgain = MutableLiveData<Boolean>()
+    val eventPlayAgain: LiveData<Boolean>
+        get() = _eventPlayAgain
+
     // Equivalent to onCreateView() in the UI Controller
     init {
         // Log.i("ScoreViewModel", "I received $finalScore from GameFragment.kt and stored it in the score with the value of $score")
@@ -21,6 +26,16 @@ class ScoreViewModel(finalScore: Int) : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         Log.i("GameViewModel", "GameViewModel destroyed")
+    }
+
+    // Method : onPlayAgain - True
+    fun onPlayAgain() {
+        _eventPlayAgain.value = true
+    }
+
+    // Method: OnPlayAgainComplete - False
+    fun onPlayAgainComplete() {
+        _eventPlayAgain.value = false
     }
 
 }

@@ -25,6 +25,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.ScoreFragmentBinding
@@ -62,6 +63,24 @@ class ScoreFragment : Fragment() {
         // Observer - Add observer for score
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
+        })
+
+        // Click Listener - Play Again Button
+        binding.playAgainButton.setOnClickListener {
+            // Sets the boolean value of Play Again to TRUE
+            viewModel.onPlayAgain()
+        }
+
+        // Observer - EventPlayAgain
+        viewModel.eventPlayAgain.observe(viewLifecycleOwner, Observer { playAgain ->
+            if (playAgain) {
+
+                // Restart the game
+                findNavController().navigate(ScoreFragmentDirections.actionRestart())
+
+                // Sets the boolean value of Play Again to FALSE
+                viewModel.onPlayAgainComplete()
+            }
         })
 
         return binding.root
