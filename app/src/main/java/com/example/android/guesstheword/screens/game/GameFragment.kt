@@ -54,6 +54,8 @@ class GameFragment : Fragment() {
         // Log.i("GameFragment", "Called ViewModelProvider.get")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
+        binding.lifecycleOwner = viewLifecycleOwner
+
         // Binding with the XML File
         // Set the viewModel for data binding - this allows the bound layout access to all the
         // data in teh ViewModel
@@ -84,10 +86,10 @@ class GameFragment : Fragment() {
         })
 
         // Observer -
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
+        // viewModel.word.observe(viewLifecycleOwner, Observer { newWord ->
             // binding.wordText.text = viewModel.word.value
-            binding.wordText.text = newWord
-        })
+        //    binding.wordText.text = newWord
+        // })
 
         // updateScoreText()
         // updateWordText()
