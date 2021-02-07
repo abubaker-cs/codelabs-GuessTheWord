@@ -46,6 +46,11 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProvider.get")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
+        // Binding with the XML File
+        // Set the viewModel for data binding - this allows the bound layout access to all the
+        // data in teh ViewModel
+        binding.gameViewModel = viewModel
+
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer<Boolean> { hasFinished ->
             if (hasFinished) gameFinished()
         })
@@ -59,19 +64,13 @@ class GameFragment : Fragment() {
         )
 
         // onClick() - Button: Correct
-        binding.correctButton.setOnClickListener {
-            onCorrect()
-        }
+        // binding.correctButton.setOnClickListener { onCorrect() }
 
         // onClick() - Button: Skip
-        binding.skipButton.setOnClickListener {
-            onSkip()
-        }
+        // binding.skipButton.setOnClickListener { onSkip() }
 
         // onEndGame() -
-        binding.endGameButton.setOnClickListener {
-            onEndGame()
-        }
+        // binding.endGameButton.setOnClickListener { onEndGame() }
 
         /**
          * Set up the observation relationship for the score and word LiveDatas
@@ -99,21 +98,21 @@ class GameFragment : Fragment() {
 
     /** Methods for buttons presses **/
 
-    private fun onSkip() {
-        // score--
-        // nextWord()
-        viewModel.onSkip()
-        // updateScoreText()
-        // updateWordText()
-    }
+    // private fun onSkip() {
+    // score--
+    // nextWord()
+    // viewModel.onSkip()
+    // updateScoreText()
+    // updateWordText()
+    // }
 
-    private fun onCorrect() {
-        // score++
-        // nextWord()
-        viewModel.onCorrect()
-        // updateScoreText()
-        // updateWordText()
-    }
+    // private fun onCorrect() {
+    // score++
+    // nextWord()
+    // viewModel.onCorrect()
+    // updateScoreText()
+    // updateWordText()
+    // }
 
     /** Methods for updating the UI **/
 
@@ -126,9 +125,9 @@ class GameFragment : Fragment() {
     // }
 
     // End Game - Call
-    private fun onEndGame() {
-        gameFinished()
-    }
+    // private fun onEndGame() {
+    //     gameFinished()
+    // }
 
     // End Game - Content
     private fun gameFinished() {

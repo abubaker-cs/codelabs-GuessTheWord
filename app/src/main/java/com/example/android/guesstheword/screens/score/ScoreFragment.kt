@@ -59,6 +59,10 @@ class ScoreFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
         // binding.scoreText.text = viewModel.score.toString()
 
+        // Binding with the XML File
+        // Set the viewModel for data binding - this allows the bound layout access to all the
+        // data in teh ViewModel
+        binding.scoreViewModel = viewModel
 
         // Observer - Add observer for score
         viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
@@ -66,10 +70,10 @@ class ScoreFragment : Fragment() {
         })
 
         // Click Listener - Play Again Button
-        binding.playAgainButton.setOnClickListener {
-            // Sets the boolean value of Play Again to TRUE
-            viewModel.onPlayAgain()
-        }
+        // binding.playAgainButton.setOnClickListener {
+        // Sets the boolean value of Play Again to TRUE
+        //    viewModel.onPlayAgain()
+        //}
 
         // Observer - EventPlayAgain
         viewModel.eventPlayAgain.observe(viewLifecycleOwner, Observer { playAgain ->
